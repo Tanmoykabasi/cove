@@ -1,0 +1,1053 @@
+/* Ported from the original standalone landing page (COVE Landing Page.html).
+   Kept as its own stylesheet with the same tokens and cascade so the
+   first-run page renders exactly as designed, independent of the app shell
+   (which uses its own light/dark theme variables). */
+
+.cove-landing {
+  color-scheme: light;
+  --bg: #eff9f7;
+  --surface: #ffffff;
+  --surface-2: #e2f3f0;
+  --surface-3: #c8e9e4;
+  --ink: #102420;
+  --muted: #506862;
+  --line: #b8d7d1;
+  --teal: #007b70;
+  --teal-deep: #005c54;
+  --teal-soft: #d1f2ec;
+  --coral: #e76d55;
+  --coral-soft: #fee2da;
+  --sun: #f4bd55;
+  --code-bg: #0c2824;
+  --code-ink: #d8fff7;
+  --white: #ffffff;
+  --shadow: 0 24px 70px rgba(24, 72, 64, 0.14);
+  --shadow-soft: 0 12px 34px rgba(24, 72, 64, 0.09);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --max: 1180px;
+}
+
+/* Dark palette. Applies when the OS asks for dark and the visitor has not
+   pinned light (`data-theme="light"`), or when they pin dark explicitly. The
+   two blocks carry the same tokens on purpose - CSS cannot share a declaration
+   list across a media query and an attribute selector. */
+.cove-landing[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #081715;
+  --surface: #10231f;
+  --surface-2: #15312b;
+  --surface-3: #1c4038;
+  --ink: #eefbf8;
+  --muted: #a9c4be;
+  --line: #2b5149;
+  --teal: #4ed0bf;
+  --teal-deep: #85e8db;
+  --teal-soft: #173d36;
+  --coral: #ff937e;
+  --coral-soft: #4a2925;
+  --sun: #f4ca75;
+  --code-bg: #06110f;
+  --code-ink: #d8fff7;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  --shadow-soft: 0 12px 34px rgba(0, 0, 0, 0.24);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cove-landing:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #081715;
+    --surface: #10231f;
+    --surface-2: #15312b;
+    --surface-3: #1c4038;
+    --ink: #eefbf8;
+    --muted: #a9c4be;
+    --line: #2b5149;
+    --teal: #4ed0bf;
+    --teal-deep: #85e8db;
+    --teal-soft: #173d36;
+    --coral: #ff937e;
+    --coral-soft: #4a2925;
+    --sun: #f4ca75;
+    --code-bg: #06110f;
+    --code-ink: #d8fff7;
+    --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+    --shadow-soft: 0 12px 34px rgba(0, 0, 0, 0.24);
+  }
+}
+
+.cove-landing {
+  min-height: 100dvh;
+}
+
+.cove-landing * {
+  box-sizing: border-box;
+}
+.cove-landing html,
+.cove-landing {
+  scroll-behavior: smooth;
+}
+.cove-landing {
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 8% 3%, color-mix(in srgb, var(--sun) 15%, transparent) 0 11rem, transparent 24rem),
+    var(--bg);
+  color: var(--ink);
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cove-landing a {
+  color: inherit;
+}
+.cove-landing button,
+.cove-landing a {
+  -webkit-tap-highlight-color: transparent;
+}
+.cove-landing button {
+  font: inherit;
+}
+.cove-landing .wrap {
+  width: min(var(--max), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.cove-landing .site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px);
+}
+.cove-landing .site-nav .wrap {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+.cove-landing .wordmark {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.cove-landing .wordmark:hover {
+  color: var(--teal-deep);
+}
+.cove-landing .wordmark:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--teal) 34%, transparent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Right-hand cluster: nav links, theme toggle and the mobile menu button, so
+   a phone shows just the two icons opposite the wordmark. */
+.cove-landing .nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cove-landing .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+.cove-landing .nav-links a {
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.cove-landing .nav-links a:hover,
+.cove-landing .nav-links a:focus-visible {
+  color: var(--ink);
+}
+.cove-landing .nav-cta,
+.cove-landing .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 999px;
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-weight: 800;
+  line-height: 1.2;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+.cove-landing .nav-cta {
+  background: var(--ink);
+  color: var(--bg);
+  cursor: pointer;
+}
+.cove-landing .button.primary {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 15px 22px;
+}
+.cove-landing .button.secondary {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 15px 22px;
+}
+.cove-landing .button:hover {
+  transform: translateY(-2px);
+}
+.cove-landing .nav-cta:focus-visible,
+.cove-landing .button:focus-visible,
+.cove-landing .nav-links a:focus-visible,
+.cove-landing .tab:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--teal) 34%, transparent);
+  outline-offset: 3px;
+}
+/* Floating back-to-top control: bottom-right, circular, and out of the way
+   until the reader scrolls past the hero. */
+.cove-landing .back-to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+.cove-landing .back-to-top.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.cove-landing .back-to-top:hover {
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+.cove-landing .back-to-top:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--teal) 34%, transparent);
+  outline-offset: 3px;
+}
+
+.cove-landing .menu-button {
+  display: none;
+}
+
+/* Theme toggle - always visible, left of the nav links, and the same circular
+   treatment as the mobile menu button so the two read as one control pair. */
+.cove-landing .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+.cove-landing .theme-toggle:hover {
+  transform: translateY(-2px);
+  background: var(--surface-2);
+}
+.cove-landing .theme-toggle:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--teal) 34%, transparent);
+  outline-offset: 3px;
+}
+
+.cove-landing .hero {
+  position: relative;
+  padding: 86px 0 68px;
+}
+.cove-landing .hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  background: repeating-radial-gradient(
+    ellipse at 50% 115%,
+    transparent 0 34px,
+    color-mix(in srgb, var(--teal) 9%, transparent) 35px 36px,
+    transparent 37px 58px
+  );
+  pointer-events: none;
+  opacity: 0.8;
+}
+.cove-landing .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(440px, 0.9fr);
+  gap: clamp(46px, 7vw, 90px);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.cove-landing .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font: 500 0.76rem/1.2 "DM Mono", monospace;
+  color: var(--teal-deep);
+}
+.cove-landing .kicker::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--coral);
+}
+.cove-landing h1 {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(2.9rem, 6vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  font-weight: 800;
+}
+.cove-landing h1 .accent {
+  color: var(--teal-deep);
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.12em;
+}
+.cove-landing .lede {
+  max-width: 650px;
+  margin: 26px 0 0;
+  font-size: clamp(1.05rem, 1.8vw, 1.24rem);
+  color: var(--muted);
+}
+.cove-landing .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+.cove-landing .signal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+.cove-landing .signal-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cove-landing .signal-row i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 4px var(--teal-soft);
+}
+
+.cove-landing .product-window {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg) var(--radius-lg) 48px var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transform: rotate(1deg);
+}
+.cove-landing .product-window::before {
+  content: "PRODUCT PREVIEW";
+  position: absolute;
+  right: -30px;
+  top: 26px;
+  z-index: 2;
+  width: 155px;
+  padding: 6px 0;
+  transform: rotate(38deg);
+  text-align: center;
+  background: var(--sun);
+  color: #2b2110;
+  font: 500 0.58rem/1 "DM Mono", monospace;
+  letter-spacing: 0.08em;
+}
+.cove-landing .window-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.cove-landing .window-dots {
+  display: flex;
+  gap: 7px;
+}
+.cove-landing .window-dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.cove-landing .window-dots span:first-child {
+  background: var(--coral);
+}
+.cove-landing .window-label {
+  font: 500 0.72rem/1 "DM Mono", monospace;
+  color: var(--muted);
+}
+.cove-landing .connect-panel {
+  padding: 24px;
+}
+.cove-landing .panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 23px;
+}
+.cove-landing .panel-head h2 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+.cove-landing .panel-head p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+.cove-landing .step-badge {
+  flex: none;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: var(--coral-soft);
+  color: var(--coral);
+  font: 500 0.66rem/1 "DM Mono", monospace;
+}
+.cove-landing .field {
+  margin-top: 16px;
+}
+.cove-landing .field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+.cove-landing .fake-input {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  font: 400 0.74rem/1.35 "DM Mono", monospace;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.cove-landing .fake-input svg {
+  flex: none;
+  color: var(--teal);
+}
+.cove-landing .panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+.cove-landing .test-button {
+  flex: 1;
+  min-height: 48px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--teal-deep);
+  color: var(--bg);
+  font-weight: 800;
+  cursor: default;
+}
+.cove-landing .ready {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.cove-landing .ready i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sun);
+}
+.cove-landing .discovery-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.cove-landing .mini-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  background: var(--surface);
+}
+.cove-landing .mini-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.64rem;
+  margin-bottom: 4px;
+}
+.cove-landing .mini-card strong {
+  display: block;
+  font-size: 0.78rem;
+}
+
+.cove-landing .marquee {
+  border-block: 1px solid var(--line);
+  background: var(--surface);
+  padding: 16px 0;
+}
+.cove-landing .marquee .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.cove-landing .marquee strong {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.cove-landing .compat-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cove-landing .compat-list span {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: 500 0.67rem/1 "DM Mono", monospace;
+  color: var(--muted);
+  background: var(--bg);
+}
+
+.cove-landing section {
+  scroll-margin-top: 90px;
+}
+.cove-landing .section-pad {
+  padding: 104px 0;
+}
+.cove-landing .section-head {
+  display: grid;
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 52px;
+}
+.cove-landing .section-num {
+  font: 500 0.8rem/1 "DM Mono", monospace;
+  color: var(--coral);
+}
+.cove-landing .section-head h2,
+.cove-landing .workflow-copy h2,
+.cove-landing .final h2 {
+  margin: 12px 0 0;
+  font-size: clamp(2rem, 4vw, 3.7rem);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+.cove-landing .section-head p {
+  margin: 0;
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 1.04rem;
+}
+
+.cove-landing .feature-list {
+  border-top: 1px solid var(--line);
+}
+.cove-landing .feature {
+  display: grid;
+  grid-template-columns: 72px 1fr 1.25fr;
+  gap: 30px;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cove-landing .feature-icon {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  color: var(--teal-deep);
+  background: var(--teal-soft);
+  border-radius: 50% 50% 50% 14px;
+}
+.cove-landing .feature h3 {
+  margin: 0;
+  font-size: 1.12rem;
+}
+.cove-landing .feature p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.cove-landing .workflow-section {
+  background: var(--code-bg);
+  color: var(--code-ink);
+  overflow: hidden;
+}
+.cove-landing .workflow-grid {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 80px;
+  align-items: center;
+}
+.cove-landing .workflow-copy .kicker {
+  color: #8ee6d9;
+}
+.cove-landing .workflow-copy p {
+  color: #a9cfc8;
+  max-width: 500px;
+}
+.cove-landing .tabs {
+  display: flex;
+  gap: 8px;
+  margin: 30px 0 20px;
+  flex-wrap: wrap;
+}
+.cove-landing .tab {
+  border: 1px solid #355e57;
+  border-radius: 999px;
+  padding: 9px 14px;
+  color: #a9cfc8;
+  background: transparent;
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.cove-landing .tab[aria-selected="true"] {
+  background: #d8fff7;
+  color: #0c2824;
+  border-color: #d8fff7;
+}
+.cove-landing .tab-copy {
+  min-height: 88px;
+}
+.cove-landing .tab-copy h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+.cove-landing .tab-copy p {
+  margin: 0;
+  font-size: 0.93rem;
+}
+.cove-landing .code-card {
+  position: relative;
+  border: 1px solid #355e57;
+  background: #06110f;
+  border-radius: 22px 22px 50px 22px;
+  padding: 30px;
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.32);
+  font: 400 0.78rem/1.9 "DM Mono", monospace;
+  overflow: hidden;
+}
+.cove-landing .code-card::after {
+  content: "";
+  position: absolute;
+  right: -55px;
+  bottom: -55px;
+  width: 140px;
+  height: 140px;
+  border: 1px solid #24483f;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 18px #0d201c,
+    0 0 0 19px #24483f,
+    0 0 0 37px #0d201c,
+    0 0 0 38px #24483f;
+}
+.cove-landing .code-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #203c36;
+  color: #7da79f;
+}
+.cove-landing .code-line {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 14px;
+}
+.cove-landing .ln {
+  color: #365f57;
+  user-select: none;
+}
+.cove-landing .code-key {
+  color: #ff9f8b;
+}
+.cove-landing .code-value {
+  color: #f4ca75;
+}
+.cove-landing .code-dim {
+  color: #84afa6;
+}
+.cove-landing .code-good {
+  color: #70dccd;
+}
+
+.cove-landing .use-cases {
+  padding: 104px 0;
+}
+.cove-landing .case-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr 0.9fr;
+  gap: 18px;
+}
+.cove-landing .case-card {
+  min-height: 250px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cove-landing .case-card:first-child {
+  border-radius: 42px var(--radius-md) var(--radius-md) var(--radius-md);
+  background: var(--teal-soft);
+}
+.cove-landing .case-card:nth-child(2) {
+  border-radius: var(--radius-md) var(--radius-md) 42px var(--radius-md);
+}
+.cove-landing .case-card:nth-child(3) {
+  border-radius: var(--radius-md) 42px var(--radius-md) var(--radius-md);
+  background: var(--coral-soft);
+}
+.cove-landing .case-card > span {
+  font: 500 0.7rem/1 "DM Mono", monospace;
+  color: var(--muted);
+}
+.cove-landing .case-card h3 {
+  margin: 45px 0 0;
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+.cove-landing .case-card p {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.cove-landing .principles {
+  padding-bottom: 104px;
+}
+.cove-landing .principle-panel {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 70px;
+  padding: 50px;
+  border: 1px solid var(--line);
+  border-radius: 50px 20px 50px 20px;
+  background: var(--surface);
+}
+.cove-landing .principle-panel h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+.cove-landing .principle-list {
+  display: grid;
+  gap: 24px;
+}
+.cove-landing .principle {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 14px;
+}
+.cove-landing .principle svg {
+  color: var(--teal-deep);
+  margin-top: 2px;
+}
+.cove-landing .principle h3 {
+  margin: 0 0 5px;
+  font-size: 0.98rem;
+}
+.cove-landing .principle p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.cove-landing .final {
+  text-align: center;
+  padding: 82px 0 92px;
+  border-top: 1px solid var(--line);
+}
+.cove-landing .final h2 {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.cove-landing .final p {
+  max-width: 600px;
+  margin: 20px auto 28px;
+  color: var(--muted);
+}
+.cove-landing .final .button {
+  min-width: 190px;
+}
+.cove-landing .fine-print {
+  margin-top: 26px !important;
+  font-size: 0.76rem;
+}
+.cove-landing footer {
+  border-top: 1px solid var(--line);
+  padding: 24px 0 calc(24px + env(safe-area-inset-bottom));
+  color: var(--muted);
+}
+.cove-landing footer .wrap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  font-size: 0.76rem;
+}
+.cove-landing footer .build-note {
+  justify-self: center;
+}
+.cove-landing footer a {
+  justify-self: end;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 930px) {
+  .cove-landing .hero-grid,
+  .cove-landing .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+  .cove-landing .hero-grid {
+    gap: 50px;
+  }
+  .cove-landing .hero-copy {
+    max-width: 760px;
+  }
+  .cove-landing .product-window {
+    width: min(100%, 600px);
+    margin-inline: auto;
+  }
+  .cove-landing .section-head {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .cove-landing .workflow-grid {
+    gap: 48px;
+  }
+  .cove-landing .workflow-copy {
+    max-width: 690px;
+  }
+  .cove-landing .case-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cove-landing .case-card:first-child {
+    grid-column: 1 / -1;
+    min-height: 220px;
+  }
+  .cove-landing .principle-panel {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+}
+
+@media (max-width: 680px) {
+  .cove-landing .wrap {
+    width: min(100% - 28px, var(--max));
+  }
+  .cove-landing .site-nav .wrap {
+    min-height: 62px;
+  }
+  .cove-landing .menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .cove-landing .nav-links {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 14px;
+    right: 14px;
+    padding: 18px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+  }
+  .cove-landing .nav-links.open {
+    display: flex;
+  }
+  .cove-landing .nav-links a {
+    padding: 7px 3px;
+  }
+  .cove-landing .nav-links .nav-cta {
+    color: var(--bg);
+    text-align: center;
+  }
+  .cove-landing .hero {
+    padding: 58px 0 54px;
+  }
+  .cove-landing h1 {
+    font-size: clamp(2.65rem, 15vw, 4.1rem);
+  }
+  .cove-landing .lede {
+    font-size: 1rem;
+  }
+  .cove-landing .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .cove-landing .button {
+    width: 100%;
+  }
+  .cove-landing .signal-row {
+    display: grid;
+    gap: 10px;
+  }
+  .cove-landing .product-window {
+    transform: none;
+    border-radius: 22px 22px 36px 22px;
+  }
+  .cove-landing .connect-panel {
+    padding: 19px;
+  }
+  .cove-landing .panel-head {
+    margin-bottom: 18px;
+  }
+  .cove-landing .panel-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .cove-landing .ready {
+    align-self: flex-start;
+  }
+  .cove-landing .discovery-strip {
+    grid-template-columns: 1fr;
+  }
+  .cove-landing .marquee .wrap {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .cove-landing .section-pad,
+  .cove-landing .use-cases {
+    padding: 76px 0;
+  }
+  .cove-landing .section-head {
+    margin-bottom: 34px;
+  }
+  .cove-landing .feature {
+    grid-template-columns: 54px 1fr;
+    gap: 18px;
+    padding: 24px 0;
+  }
+  .cove-landing .feature p {
+    grid-column: 2;
+  }
+  .cove-landing .workflow-grid {
+    gap: 38px;
+  }
+  .cove-landing .code-card {
+    padding: 22px 18px;
+    font-size: 0.67rem;
+    overflow-wrap: anywhere;
+  }
+  .cove-landing .code-line {
+    grid-template-columns: 18px 1fr;
+    gap: 8px;
+  }
+  .cove-landing .case-grid {
+    grid-template-columns: 1fr;
+  }
+  .cove-landing .case-card:first-child {
+    grid-column: auto;
+  }
+  .cove-landing .case-card {
+    min-height: 220px;
+  }
+  .cove-landing .principles {
+    padding-bottom: 76px;
+  }
+  .cove-landing .principle-panel {
+    padding: 32px 24px;
+    border-radius: 34px 14px 34px 14px;
+  }
+  .cove-landing .final {
+    padding: 68px 0 76px;
+  }
+  .cove-landing footer .wrap {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .cove-landing footer a {
+    justify-self: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cove-landing {
+    scroll-behavior: auto;
+  }
+  .cove-landing *,
+  .cove-landing *::before,
+  .cove-landing *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

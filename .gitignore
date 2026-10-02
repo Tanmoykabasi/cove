@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# Build output and caches
+.output/
+.vercel/
+dist/
+.tanstack/
+.nitro/
+*.tsbuildinfo
+
+# Environment / secrets - never commit these
+.env
+.env.*
+!.env.example
+
+# Local QA artifacts (the curated images used by the README live in docs/)
+screenshots/
+
+# Workspace-local files from the app-builder template
+# `.grok/app-env.json` is deliberately kept: scripts/with-app-env.mjs reads it
+# to inject VITE_AUTH_ENABLED into the dev/build/preview environment.
+.grok/skills/
+.grok/references/
+.grok/status
+.workbuddy-ai/
+AGENTS.md
+startup.sh
+.zcodeignore
+.node_modules.lock
+.project_id
+artifacts/
+attachments/
+scripts/*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/**
+ * Palette indirection.
+ *
+ * `@theme` tokens must stay static for Tailwind, so every `--color-*` token is
+ * defined once as `var(--cove-*)` and the palettes below only swap the
+ * `--cove-*` values. `<html data-theme="…">` is set by `src/lib/display/apply.ts`
+ * (and by the pre-paint script in `__root.tsx`, so there is no flash of the
+ * wrong theme).
+ */
+:root {
+  color-scheme: dark;
+
+  --cove-bg: #0b0b0c;
+  --cove-surface: #131316;
+  --cove-surface-2: #1c1c21;
+  --cove-fg: #f3f2ef;
+  --cove-muted: #8e8e96;
+  --cove-subtle: #6a6a72;
+  --cove-accent: #d2d6de;
+  --cove-accent-fg: #0b0b0c;
+  --cove-border: #2a2a31;
+  --cove-danger: #c45c4a;
+  --cove-ring: #d2d6de;
+
+  --cove-shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --cove-shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.14);
+  --cove-shadow-lift: 0 18px 40px -24px rgba(0, 0, 0, 0.7);
+  --cove-image-outline: rgba(255, 255, 255, 0.1);
+
+  /* Reading measure for the transcript and composer. */
+  --cove-measure: 42rem;
+}
+
+/**
+ * Light palette — kept deliberately bright and high-contrast rather than a
+ * washed-out inversion: white surfaces, near-black text, and a saturated indigo
+ * accent so selected states stay legible.
+ */
+html[data-theme="light"] {
+  color-scheme: light;
+
+  --cove-bg: #fbfbfd;
+  --cove-surface: #ffffff;
+  --cove-surface-2: #f0f1f6;
+  --cove-fg: #14141b;
+  --cove-muted: #4c4f57;
+  --cove-subtle: #6f727c;
+  --cove-accent: #4f46e5;
+  --cove-accent-fg: #ffffff;
+  --cove-border: #e1e2e9;
+  --cove-danger: #c2352b;
+  --cove-ring: #4f46e5;
+
+  --cove-shadow-border: 0 0 0 1px rgba(20, 20, 27, 0.1);
+  --cove-shadow-border-hover: 0 0 0 1px rgba(20, 20, 27, 0.2);
+  --cove-shadow-lift: 0 18px 40px -24px rgba(20, 20, 27, 0.22);
+  --cove-image-outline: rgba(20, 20, 27, 0.12);
+}
+
+/* Increased contrast: push secondary text toward the foreground and strengthen
+   every hairline border, in whichever theme is active. */
+html[data-contrast="high"][data-theme="dark"] {
+  --cove-muted: #cbcbd3;
+  --cove-subtle: #a9a9b3;
+  --cove-border: #4c4c58;
+  --cove-shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.3);
+  --cove-shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+html[data-contrast="high"][data-theme="light"] {
+  --cove-muted: #2a2c33;
+  --cove-subtle: #45484f;
+  --cove-border: #a6a8b3;
+  --cove-shadow-border: 0 0 0 1px rgba(20, 20, 27, 0.36);
+  --cove-shadow-border-hover: 0 0 0 1px rgba(20, 20, 27, 0.58);
+}
+
+/* Wide reading measure, toggled from Settings → Appearance. */
+html[data-width="wide"] {
+  --cove-measure: 56rem;
+}
+
+@theme {
+  --color-bg: var(--cove-bg);
+  --color-surface: var(--cove-surface);
+  --color-surface-2: var(--cove-surface-2);
+  --color-fg: var(--cove-fg);
+  --color-muted: var(--cove-muted);
+  --color-subtle: var(--cove-subtle);
+  --color-accent: var(--cove-accent);
+  --color-accent-fg: var(--cove-accent-fg);
+  --color-border: var(--cove-border);
+  --color-danger: var(--cove-danger);
+  --color-ring: var(--cove-ring);
+
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+
+  --shadow-border: var(--cove-shadow-border);
+  --shadow-border-hover: var(--cove-shadow-border-hover);
+  --shadow-lift: var(--cove-shadow-lift);
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 35%, transparent);
+    color: var(--color-fg);
+  }
+
+  textarea,
+  input,
+  select {
+    font-family: inherit;
+  }
+
+  img.chat-image {
+    outline: 1px solid var(--cove-image-outline);
+    outline-offset: -1px;
+  }
+}
+
+/* Shared reading measure so the transcript and composer stay aligned and the
+   Appearance panel can widen both at once. */
+.cove-measure {
+  max-width: var(--cove-measure);
+}
+
+/* Reduced motion, from either the OS or the explicit Appearance setting. The
+   media query is skipped only when the user has deliberately chosen "full". */
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion="full"]) *,
+  html:not([data-motion="full"]) *::before,
+  html:not([data-motion="full"]) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
