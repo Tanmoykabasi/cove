@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/__grok/icon-180.png" alt="Cove logo" width="120" />
+<img src="public/favicon.svg" alt="Cove logo" width="120" />
 
 # Cove
 
