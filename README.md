@@ -297,8 +297,7 @@ If you change chat state, add or update tests alongside the module you touched.
 
 ## License
 
-No license has been chosen yet. Add one (MIT, Apache-2.0, or your preference)
-before publishing, and update this section.
+MIT License — Copyright (c) 2026 Tanmoy Kabasi. See [LICENSE](LICENSE) for the full text.
 
 ---
 
