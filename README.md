@@ -9,7 +9,7 @@ Bring your own base URL and API key - test the connection, discover the models,
 compare two answers side by side, and see what each reply costs in tokens and
 time.
 
-**Live: https://cove-tanmoykabasis-projects.vercel.app/**
+**Live: https://trycove.vercel.app/**
 
 [![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
