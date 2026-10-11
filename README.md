@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/landing-light.png" alt="Cove landing page" width="900" />
+<img src="public/__grok/icon-180.png" alt="Cove logo" width="120" />
 
 # Cove
 
